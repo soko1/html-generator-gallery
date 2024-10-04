@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import base64
 
 # Get a list of supported image files in the current directory and sort them
 def get_image_files():
@@ -50,6 +49,7 @@ def generate_html(file_list):
                 background-color: rgba(0, 0, 0, 0.9);
                 justify-content: center;
                 align-items: center;
+                flex-direction: column;
             }
             .lightbox img {
                 max-width: 90%;
@@ -69,6 +69,14 @@ def generate_html(file_list):
             .right-arrow {
                 right: 20px;
             }
+            .image-description {
+                color: #fff;
+                margin-top: 10px;
+                text-align: center;
+                max-width: 90%; /* Limit text width */
+                overflow: auto; /* Add scrolling if text is long */
+                white-space: nowrap; /* Prevent line breaks */
+            }
         </style>
     </head>
     <body>
@@ -76,17 +84,17 @@ def generate_html(file_list):
         <div class="arrow left-arrow" onclick="changeImage(-1); event.stopPropagation();">&#10094;</div>
         <div class="arrow right-arrow" onclick="changeImage(1); event.stopPropagation();">&#10095;</div>
         <img id="lightbox-img" src="">
+        <div class="image-description" id="image-description"></div>
     </div>
-    '''
-
-    html_content += '''
     <script>
-        let images = ''' + str(file_list) + ''';
+        let images = [];
+        let descriptions = {};
         let currentIndex = 0;
 
         function showImage(index) {
             currentIndex = index;
-            document.getElementById('lightbox-img').src = images[index];
+            document.getElementById('lightbox-img').src = images[index].src;
+            document.getElementById('image-description').innerHTML = descriptions[images[index].name] || '';
             document.getElementById('lightbox').style.display = 'flex';
         }
 
@@ -113,12 +121,29 @@ def generate_html(file_list):
     </script>
     '''
 
-    for filename in file_list:
-        encoded_image = base64.b64encode(open(filename, 'rb').read()).decode()
+    for index, filename in enumerate(file_list):
+        # Create URL for the image
+        image_url = filename
+        
+        # Check for the corresponding .txt file
+        txt_filename = os.path.splitext(filename)[0] + '.txt'
+        description = ''
+        if os.path.isfile(txt_filename):
+            with open(txt_filename, 'r', encoding='utf-8') as txt_file:
+                description = txt_file.read().strip()
+
+        # Add two line breaks to the description
+        description += '<br><br>'
+
+        # Add image information to the JavaScript array
         html_content += f'''
-        <div class="thumbnail" onclick="showImage({file_list.index(filename)})">
-            <img src="data:image/jpeg;base64,{encoded_image}" alt="{filename}">
+        <div class="thumbnail" onclick="showImage({index})">
+            <img src="{image_url}" alt="{filename}">
         </div>
+        <script>
+            images.push({{src: '{image_url}', name: '{filename}'}});
+            descriptions['{filename}'] = `{description}`;
+        </script>
         '''
 
     html_content += '''
