@@ -105,6 +105,9 @@ def generate_html(file_list):
                 if (event.key === 'ArrowRight') {
                     changeImage(1);
                 }
+                if (event.key === 'Escape') {
+                    document.getElementById('lightbox').style.display = 'none';
+                }
             }
         });
     </script>
