@@ -1,10 +1,10 @@
 # html-generator-gallery
 
-**html-generator-gallery** is a simple and efficient web application that generates an image gallery in HTML format. This project supports various image formats including JPEG, PNG, GIF, BMP, TIFF, and WEBP, allowing users to easily view and navigate their images.
+**html-generator-gallery** is a simple and efficient web application that generates an image gallery in HTML format. This project supports various image formats including JPEG, PNG, GIF, BMP, allowing users to easily view and navigate their images.
 
 ## Features
 
-- Supports multiple image formats: `.jpg`, `.jpeg`, `.png`, `.gif`, `.bmp`, `.tiff`, and `.webp`.
+- Supports multiple image formats: `.jpg`, `.jpeg`, `.png`, and `.bmp`.
 - Automatically scans the current directory for image files and generates a responsive HTML gallery.
 - Lightbox effect for a better viewing experience with a dark background.
 - Thumbnail previews for quick access to images.
@@ -20,18 +20,18 @@
 
 2. Ensure you have Python 3 installed.
 
-3. Place your image files in the same directory as `gallery.py`.
+3. Place your image files in the same directory as `html-generator-gallery.py`.
 
 4. Run the script:
    ```bash
-   python3 gallery.py
+   python3 html-generator-gallery.py
    ```
 
-5. Open `gallery.html` in your web browser to view your image gallery.
+5. Open `index.html` in your web browser to view your image gallery.
 
 ## Usage
 
-Make sure to run the script in the directory containing your image files. The HTML file `gallery.html` will be created, showcasing your images in a clean and organized format.
+Make sure to run the script in the directory containing your image files. The HTML file `index.html` will be created, showcasing your images in a clean and organized format.
 
 ## License
 

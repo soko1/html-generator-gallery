@@ -134,10 +134,10 @@ def main():
 
     html_output = generate_html(image_files)
 
-    with open("gallery.html", "w", encoding="utf-8") as f:
+    with open("index.html", "w", encoding="utf-8") as f:
         f.write(html_output)
 
-    print("HTML page with the gallery created: gallery.html")
+    print("HTML page with the gallery created: index.html")
 
 if __name__ == "__main__":
     main()
