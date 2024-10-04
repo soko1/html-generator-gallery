@@ -77,6 +77,13 @@ def generate_html(file_list):
                 overflow: auto; /* Add scrolling if text is long */
                 white-space: nowrap; /* Prevent line breaks */
             }
+            .filename {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                color: #fff;
+                font-size: 0.5em; /* Reduced font size */
+            }
         </style>
     </head>
     <body>
@@ -85,6 +92,7 @@ def generate_html(file_list):
         <div class="arrow right-arrow" onclick="changeImage(1); event.stopPropagation();">&#10095;</div>
         <img id="lightbox-img" src="">
         <div class="image-description" id="image-description"></div>
+        <div class="filename" id="filename"></div> <!-- Filename display -->
     </div>
     <script>
         let images = [];
@@ -95,6 +103,7 @@ def generate_html(file_list):
             currentIndex = index;
             document.getElementById('lightbox-img').src = images[index].src;
             document.getElementById('image-description').innerHTML = descriptions[images[index].name] || '';
+            document.getElementById('filename').innerHTML = `<a href="${images[index].name}" style="color: #fff; text-decoration: underline;">${images[index].name}</a>`; // Show the filename as a link
             document.getElementById('lightbox').style.display = 'flex';
         }
 
