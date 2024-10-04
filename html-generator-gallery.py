@@ -80,7 +80,7 @@ def generate_html(file_list):
             .filename {
                 position: absolute;
                 bottom: 10px;
-                left: 10px;
+                right: 10px;
                 color: #fff;
                 font-size: 0.5em; /* Reduced font size */
             }
