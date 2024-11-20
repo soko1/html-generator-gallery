@@ -37,7 +37,6 @@ def generate_html(file_list):
             img {
                 max-width: 200px;
                 max-height: 150px;
-                border: 2px solid #fff;
             }
             .lightbox {
                 display: none;
